@@ -1,5 +1,5 @@
-### Project4
-## Niche Market
+## Project4
+### Niche Market
 
 ## Technologies
 
@@ -14,7 +14,7 @@
 
 ## Wireframes
 
-![](wireframe.png)
+![Wireframe](wireframe.png)
 
 ## User stories
 
