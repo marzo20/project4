@@ -14,6 +14,7 @@
 - Django
 - pillow
 - Smartcar API
+https://smartcar.com/docs/
 - Vehicle API
     https://vpic.nhtsa.dot.gov/api/Home
 
