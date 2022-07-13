@@ -14,7 +14,7 @@
 
 ## Wireframes
 
-![Wireframe](wireframe.png)
+![Wireframe](/pitch/wireframe.png)
 
 ## User stories
 
