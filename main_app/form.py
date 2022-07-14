@@ -5,3 +5,4 @@ class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
         fields = ['make', 'model', 'trim', 'year']
+
