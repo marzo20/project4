@@ -57,7 +57,7 @@ def vehicles(request):
 @login_required(login_url='/login/')
 def vehicle_create(request):
     if request.method == 'POST':
-        form = VehicleForm(request.POST)
+        form = VehicleForm(request.POST, request.FILES)
         if form.is_valid():
             form.instance.user = request.user
             vehicle = form.save()
@@ -70,7 +70,7 @@ def vehicle_create(request):
 def vehicle_edit(request, pk):
     vehicle = Vehicle.objects.get(pk=pk)
     if request.method == 'POST':
-        form = VehicleForm(request.POST, instance=vehicle)
+        form = VehicleForm(request.POST, request.FILES, instance=vehicle)
         if form.is_valid():
             vehicle = form.save()
             return redirect('vehicles')
