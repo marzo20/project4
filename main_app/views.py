@@ -59,6 +59,7 @@ def vehicle_create(request):
     if request.method == 'POST':
         form = VehicleForm(request.POST)
         if form.is_valid():
+            form.instance.user = request.user
             vehicle = form.save()
             return redirect('vehicles')
     else:
@@ -83,13 +84,7 @@ def vehicle_delete(request, pk):
 
 def profile_show(request):
     if request.user.is_authenticated:
-        Vehicles = Vehicle.objects.filter(user=user)
-        return render(request, 'profile.html', {'vehicles': vehicles})
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request,user)
+    # Do something for authenticated users.
         return render(request, 'profile.html')
     else:
         return HttpResponse('<h1>Something went wrong with login</h1>')

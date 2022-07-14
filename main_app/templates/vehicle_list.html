@@ -10,14 +10,16 @@
 
         <a href="{{ vehicle.id }}/edit">
             <li>
-                {{ vehicle.make }},
+                {{ vehicle.make }}
                 {{ vehicle.model }}
                 {{ vehicle.trim }}
                 {{ vehicle.year }}
+                by {{ vehicle.user }}
             </li>
         </a>
+        {% if vehicle.user == request.user %}
         <a href="{{ vehicle.id }}/delete">X</a>
-
+        {% endif %}
         {% endfor %}
     </ul>
 </div>

@@ -12,12 +12,15 @@
 </head>
 <body>
     <header>
+        <h1>Niche Market</h1>
         <nav>
             <ul>
+                <li><a href="{% url 'vehicles' %}">Vehicles</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url  'profile' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
+                    <li><a href="{% url 'register' %}">Signup</a></li>
                     <li><a href="{% url 'login_page' %}">Login</a></li>
                 {% endif %}
             </ul>
