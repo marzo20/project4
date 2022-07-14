@@ -1,0 +1,20 @@
+<div>
+    <h2>
+        Vehicles
+        <a href="add">(+)</a>
+    </h2>
+    <ul>
+        {% for vehicle in vehicles %}
+
+        <a href="{{ vehicle.id }}/edit">
+            <li>
+                {{ vehicle.make }},
+                {{ vehicle.model }}
+                {{ vehicle.trim }}
+                {{ vehicle.year }}
+            </li>
+        </a>
+
+        {% endfor %}
+    </ul>
+</div>
