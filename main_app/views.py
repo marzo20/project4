@@ -57,30 +57,27 @@ def vehicles(request):
     return render(request, 'vehicle_list.html', {'vehicles':vehicles})
 
 def index(request):
-    url = "https://vin-decoder19.p.rapidapi.com/vin_decoder_lite"
-    querystring = request.GET.get('VIN')
+    # querystring = request.GET.get('VIN')
+    querystring = {"vin":"WBA53BH03MWX29672"}
+    url = f"https://cis-vin-decoder.p.rapidapi.com/vinDecode"
 
     headers = {
 	"X-RapidAPI-Key": "3c7019782cmsh543dfafbdcda7cbp11c5a2jsn177cb39c544a",
-	"X-RapidAPI-Host": "vin-decoder19.p.rapidapi.com"
+	"X-RapidAPI-Host": "cis-vin-decoder.p.rapidapi.com"
 }
-
-    response = requests.get(url, headers=headers, params={"vin":querystring})
-    info = response.json()
-    context = {
-        'info' : info
-    } 
-    if (
-    response.status_code != 204 and
-    response.headers["content-type"].strip().startswith("application/json")
-):
-        try:
-            return render(request,'info.html', context)
-        except ValueError:
-        # decide how to ha
-            return render('home.html')
-     
-
+    
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    info = response.text
+    info_json = json.loads(info)
+    # data = {
+    #     "brandName": response["brandName"],
+    #     "modelName": response["modelName"],
+    # }
+    print(url)
+    print(info_json)
+    return render(request,'info.html', info_json)
+    
+        
 @login_required(login_url='/login/')
 def vehicle_create(request):
     if request.method == 'POST':
@@ -110,8 +107,43 @@ def vehicle_delete(request, pk):
     return redirect('vehicles')
 
 def profile_show(request):
+    # vehicles = Vehicle(user=request.user)
+    vehicles = Vehicle.objects.all()
     if request.user.is_authenticated:
     # Do something for authenticated users.
-        return render(request, 'profile.html')
+        return render(request, 'profile.html', {'vehicles' : vehicles})
     else:
         return HttpResponse('<h1>Something went wrong with login</h1>')
+
+def display(request):
+    querystring = request.GET.get('VIN')
+    print(querystring, 'querystring test')
+    # querystring = {"vin":"WBA53BH03MWX29672"}
+    url = f"https://cis-vin-decoder.p.rapidapi.com/vinDecode"
+    print(url)
+
+    headers = {
+	"X-RapidAPI-Key": "3c7019782cmsh543dfafbdcda7cbp11c5a2jsn177cb39c544a",
+	"X-RapidAPI-Host": "cis-vin-decoder.p.rapidapi.com"
+}
+    response = requests.get(url, headers=headers, params={"vin":querystring})
+    info = response.text
+    print(response)
+    info_json = json.loads(info)
+    return render(request, 'display.html', info_json)
+
+def add_vehicle(request):
+    print('is it hitting the route?')
+    if request.method == 'POST':
+        form = VehicleForm(request.POST)
+        print(form, 'this is the form')
+        if form.is_valid:
+            form.instance.user = request.user
+            vehicle = form.save()
+            print(vehicle, 'vehicle form')
+            return redirect('profile')
+    else:
+        print('not valid?')
+        form = VehicleForm()
+    context = {'form': form, 'header': 'Add vehicle information'}
+    return render(request, 'display.html', context)

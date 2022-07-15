@@ -1,16 +1,16 @@
-{% extends 'home.html' %}
+{% extends 'base.html' %}
 {% block content %}
-<form method="GET">
+<form action="/display" method="GET">
     <label for="VIN">VIN#</label>
     <input name="VIN"/>
     <button type="submit">submit</button>
+    <label for="Make">MAKE</label>
+    <input name="Make" value="{{ info }}"/>
 </form>
-<ul>
-    <li><strong>{{ info.VIN }}</strong></li>
-    <li><strong>{{ info.Make.value }}</strong></li>
-    <li><strong>{{ info.Model_Year.value }}</strong></li>
-    <li><strong>{{ info.Trim_Level.value }}</strong></li>
-    <li><strong>{{ info.Body_Style.value }}</strong></li>
-</ul>
 
+<ul>
+    
+    <li><strong>{{ data.Model }}</strong></li>
+    
+</ul>
 {% endblock %}

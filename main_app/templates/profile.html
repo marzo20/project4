@@ -3,8 +3,33 @@
 <div>
     <h2>Profile page</h2>
     <h4>{{ user.username }}</h4>
-   
-        </li>
-</div>
+    {% for vehicle in vehicles %}
 
+        <a href="{{ vehicle.id }}/edit">
+            <li>
+                {% if vehicle.vehicle_image %}
+                <div>
+                    <img src="{{ vehicle.vehicle_image.url }}"width=500>
+                </div>
+                {% else %}
+                <div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSETkXAZjZ_X0v4OMGi9AIX9BH_EmakbRndBs6kR5-0eJ4Qwd6QLFzULkDH_05kqr8iRco&usqp=CAU"width=500>
+                </div>
+                {% endif %}
+                {{ vehicle.make }}
+                {{ vehicle.model }}
+                {{ vehicle.trim }}
+                {{ vehicle.year }}
+            </li>
+        </a>
+    {% endfor %}
+    <h3>Add your vechicle with VIN</h3>
+    <form action="/display/" method="GET">
+        <label for="VIN">VIN#</label>
+        <input name="VIN"/>
+        <button type="submit">submit</button>
+    </form>
+</div>
+{% block display %}
+{% endblock %}
 {% endblock %}

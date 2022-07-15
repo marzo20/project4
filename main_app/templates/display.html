@@ -1,0 +1,27 @@
+{% extends 'profile.html' %}
+{% block display %}
+
+<h2>Display specs!</h2>
+<ul>
+    <li>Make: {{ data.Make }} </li>
+    <li>Mode: {{ data.Model }} </li>
+    <li>Year: {{ data.ModelYear }} </li>
+    <li>Trim: {{ data.BodyClass }} </li>
+    <li>BasePrice: {{ data.BasePrice }} </li>
+</ul>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="make">Make</label>
+        <input id="make" type="text" name="make" value="{{ data.Make }}"/>
+        <label for="model">Model</label>
+        <input id="model" type="text" name="model" value="{{ data.Model }}"/>
+        <label for="year">year</label>
+        <input id="year" type="number" name="year" value="{{ data.ModelYear }}"/>
+        <label for="bodyClass">bodyClass</label>
+        <input id="bodyClass" type="text" name="bodyClass" value="{{ data.BodyClass }}"/>
+        <button type="submit">Add to your car</button>
+    </form>
+
+{% endblock %}
