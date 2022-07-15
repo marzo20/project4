@@ -12,11 +12,11 @@
             <li>
                 {% if vehicle.vehicle_image %}
                 <div>
-                    <img src="{{ vehicle.vehicle_image.url }}">
+                    <img src="{{ vehicle.vehicle_image.url }}"width=500>
                 </div>
                 {% else %}
                 <div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSETkXAZjZ_X0v4OMGi9AIX9BH_EmakbRndBs6kR5-0eJ4Qwd6QLFzULkDH_05kqr8iRco&usqp=CAU">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSETkXAZjZ_X0v4OMGi9AIX9BH_EmakbRndBs6kR5-0eJ4Qwd6QLFzULkDH_05kqr8iRco&usqp=CAU"width=500>
                 </div>
                 {% endif %}
                 {{ vehicle.make }}

@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% block content %}
+<form method="GET">
+    <label for="VIN">VIN#</label>
+    <input name="VIN"/>
+    <button type="submit">submit</button>
+</form>
+<ul>
+    <li><strong>{{ info.VIN }}</strong></li>
+    <li><strong>{{ info.Make.value }}</strong></li>
+    <li><strong>{{ info.Model_Year.value }}</strong></li>
+    <li><strong>{{ info.Trim_Level.value }}</strong></li>
+    <li><strong>{{ info.Body_Style.value }}</strong></li>
+</ul>
+
+{% endblock %}
