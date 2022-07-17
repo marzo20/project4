@@ -13,5 +13,5 @@ urlpatterns = [
     path('register/', views.register_request, name="register"),
     path('info/', views.index, name='info'),
     path('display/', views.display, name='display'),
-    path('display/?VIN=<str:querystring>', views.add_vehicle, name="add_vehicle"),
+    path('display/?VIN=<str:querystring>/', views.add_vehicle, name="add_vehicle"),
 ]

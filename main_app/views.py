@@ -1,3 +1,4 @@
+from urllib import response
 from xmlrpc.client import ResponseError
 from django.contrib import messages
 from django.shortcuts import redirect, render
@@ -134,16 +135,27 @@ def display(request):
 
 def add_vehicle(request):
     print('is it hitting the route?')
+    # Vehicle.objects.create(make = request.POST.get('make'),
+    #                         model = request.POST.get('model'),
+    #                         year = request.POST.get('year'),
+    #                         bodyClass = request.POST.get('bodyClass')
+    
+    # )
     if request.method == 'POST':
-        form = VehicleForm(request.POST)
-        print(form, 'this is the form')
-        if form.is_valid:
-            form.instance.user = request.user
-            vehicle = form.save()
-            print(vehicle, 'vehicle form')
-            return redirect('profile')
-    else:
-        print('not valid?')
-        form = VehicleForm()
+        print(request.POST)
+        if request.POST.get("OK"):
+
+            form = VehicleForm(request.POST)
+            print(form, 'this is the form')
+            if form.is_valid:
+                form.instance.user = request.user
+                vehicle = form.save()
+                print(vehicle, 'vehicle form')
+                return redirect('profile')
+        else:
+            print('not valid?')
+            form = VehicleForm()
     context = {'form': form, 'header': 'Add vehicle information'}
     return render(request, 'display.html', context)
+    # print(request, 'difjaodijfoadjfo;adjfoadjf')
+    # return redirect('profile')

@@ -1,0 +1,19 @@
+.main{
+    color: skyblue;
+    display:grid;
+    justify-content: center;
+}
+
+.login{
+    display: flex;
+    justify-content: end;
+    margin: 20px;
+}
+.loginnav{
+    display: flex;
+    gap: 15px;
+}
+.nav{
+    display: flex;
+    justify-content: space-evenly;
+}

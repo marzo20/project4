@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Vehicle(models.Model):
+    vin = models.CharField(max_length=17, default=None)
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     bodyClass = models.CharField(max_length=50)
