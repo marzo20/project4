@@ -147,12 +147,15 @@ def add_vehicle(request):
         if form.is_valid():
             print('let meknow where')
             form.instance.user = request.user
-            vehicle = form.save()
-            return redirect('profile')
+            if not Vehicle.objects.filter(vin=request.POST.get('vin')).exists():
+                vehicle = form.save()
+                return redirect('profile')
+            else:
+                return render(request, 'display.html', {'msg': 'This VIN already exists in your profile'})
     else:
         print('is this here?')
         form = VehicleForm()
-    context = {'form': form, 'header': 'Add Vehicle in your profile.'}
+    context = {'form': form, 'header': 'Add Vehicle in your profile.', 'msg': ''}
     print('is this working?')
     return render(request, 'display.html', context)
     # Vehicle.objects.create(make = request.POST.get('make'),

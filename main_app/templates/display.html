@@ -1,5 +1,5 @@
-{% extends 'profile.html' %}
-{% block display %}
+{% extends 'base.html' %}
+{% block content %}
 
 <h2>Display specs!</h2>
 <ul>
@@ -9,18 +9,20 @@
     <li>Trim: {{ data.BodyClass }} </li>
     <li>BasePrice: {{ data.BasePrice }} </li>
 </ul>
-    
+    {% if msg %}
+    {{ msg }}
+    {% endif %}
     <form action="create/" method="POST">
         {% csrf_token %}
         <input id="vin" type="hidden" name="vin" value="{{ data.VIN }}"/>
-        <label for="make">Make</label>
-        <input id="make" type="text" name="make" value="{{ data.Make }}"/>
-        <label for="model">Model</label>
-        <input id="model" type="text" name="model" value="{{ data.Model }}"/>
-        <label for="year">year</label>
-        <input id="year" type="number" name="year" value="{{ data.ModelYear }}"/>
-        <label for="bodyClass">bodyClass</label>
-        <input id="bodyClass" type="text" name="bodyClass" value="{{ data.BodyClass }}"/>
+        <!-- <label for="make">Make</label> -->
+        <input id="make" type="hidden" name="make" value="{{ data.Make }}"/>
+        <!-- <label for="model">Model</label> -->
+        <input id="model" type="hidden" name="model" value="{{ data.Model }}"/>
+        <!-- <label for="year">year</label> -->
+        <input id="year" type="hidden" name="year" value="{{ data.ModelYear }}"/>
+        <!-- <label for="bodyClass">bodyClass</label> -->
+        <input id="bodyClass" type="hidden" name="bodyClass" value="{{ data.BodyClass }}"/>
         <!-- <button type="submit">Add to your car</button> -->
         <input type="submit" value="OK">
     </form>
