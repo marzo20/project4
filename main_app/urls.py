@@ -11,7 +11,9 @@ urlpatterns = [
     path('vehicles/<int:pk>/edit', views.vehicle_edit, name='vehicle_edit'),
     path('vehicles/<int:pk>/delete', views.vehicle_delete, name='vehicle_delete'),
     path('register/', views.register_request, name="register"),
-    path('info/', views.index, name='info'),
-    path('display/', views.display, name='display'),
-    path('display/?VIN=<str:querystring>/', views.add_vehicle, name="add_vehicle"),
+    path('info/', views.info, name='info'),
+    path('info/details/', views.index, name='details'),
+    path('profile/add/', views.display, name='display'),
+    path('profile/add/create/', views.add_vehicle, name="add_vehicle"),
+    path('about/', views.about, name='about'),
 ]

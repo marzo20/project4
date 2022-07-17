@@ -10,9 +10,9 @@
     <li>BasePrice: {{ data.BasePrice }} </li>
 </ul>
     
-    <form method="POST">
+    <form action="create/" method="POST">
         {% csrf_token %}
-        
+        <input id="vin" type="hidden" name="vin" value="{{ data.VIN }}"/>
         <label for="make">Make</label>
         <input id="make" type="text" name="make" value="{{ data.Make }}"/>
         <label for="model">Model</label>

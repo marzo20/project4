@@ -18,6 +18,9 @@ import json
 def home(request):
     return render(request, "home.html")
 
+def about(request):
+    return render(request, "about.html")
+
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
@@ -57,17 +60,20 @@ def vehicles(request):
     vehicles = Vehicle.objects.all()
     return render(request, 'vehicle_list.html', {'vehicles':vehicles})
 
-def index(request):
-    # querystring = request.GET.get('VIN')
-    querystring = {"vin":"WBA53BH03MWX29672"}
-    url = f"https://cis-vin-decoder.p.rapidapi.com/vinDecode"
+def info(request):
+    return render(request, 'info.html')
 
+def index(request):
+    querystring = request.GET.get('VIN')
+    print(querystring, 'querystring test')
+    url = f"https://cis-vin-decoder.p.rapidapi.com/vinDecode"
+    # querystring = request.GET.get('VIN')
     headers = {
 	"X-RapidAPI-Key": "3c7019782cmsh543dfafbdcda7cbp11c5a2jsn177cb39c544a",
 	"X-RapidAPI-Host": "cis-vin-decoder.p.rapidapi.com"
 }
     
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = requests.request("GET", url, headers=headers, params={"vin":querystring})
     info = response.text
     info_json = json.loads(info)
     # data = {
@@ -76,9 +82,8 @@ def index(request):
     # }
     print(url)
     print(info_json)
-    return render(request,'info.html', info_json)
-    
-        
+    return render(request,'details.html', info_json)
+
 @login_required(login_url='/login/')
 def vehicle_create(request):
     if request.method == 'POST':
@@ -135,27 +140,42 @@ def display(request):
 
 def add_vehicle(request):
     print('is it hitting the route?')
+    if request.method == 'POST':
+        print('whats not working?')
+        form = VehicleForm(request.POST)
+        print(form)
+        if form.is_valid():
+            print('let meknow where')
+            form.instance.user = request.user
+            vehicle = form.save()
+            return redirect('profile')
+    else:
+        print('is this here?')
+        form = VehicleForm()
+    context = {'form': form, 'header': 'Add Vehicle in your profile.'}
+    print('is this working?')
+    return render(request, 'display.html', context)
     # Vehicle.objects.create(make = request.POST.get('make'),
+    #                         vin = request.POST.get('vin'),
     #                         model = request.POST.get('model'),
     #                         year = request.POST.get('year'),
     #                         bodyClass = request.POST.get('bodyClass')
     
     # )
-    if request.method == 'POST':
-        print(request.POST)
-        if request.POST.get("OK"):
-
-            form = VehicleForm(request.POST)
-            print(form, 'this is the form')
-            if form.is_valid:
-                form.instance.user = request.user
-                vehicle = form.save()
-                print(vehicle, 'vehicle form')
-                return redirect('profile')
-        else:
-            print('not valid?')
-            form = VehicleForm()
-    context = {'form': form, 'header': 'Add vehicle information'}
-    return render(request, 'display.html', context)
+    # if request.method == 'POST':
+    #     print(request.POST)
+    #     if request.POST.get("OK"):
+    #         form = VehicleForm(request.POST)
+    #         print(form, 'this is the form')
+    #         if form.is_valid:
+    #             form.instance.user = request.user
+    #             vehicle = form.save()
+    #             print(vehicle, 'vehicle form')
+    #             return redirect('profile')
+    #     else:
+    #         print('not valid?')
+    #         form = VehicleForm()
+    # context = {'form': form, 'header': 'Add vehicle information'}
+    # return render(request, 'display.html', context)
     # print(request, 'difjaodijfoadjfo;adjfoadjf')
     # return redirect('profile')

@@ -1,16 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="/display" method="GET">
+<form action="details/" method="GET">
     <label for="VIN">VIN#</label>
     <input name="VIN"/>
-    <button type="submit">submit</button>
-    <label for="Make">MAKE</label>
-    <input name="Make" value="{{ info }}"/>
+    <button type="submit">Search for Details</button>
 </form>
-
-<ul>
-    
-    <li><strong>{{ data.Model }}</strong></li>
-    
-</ul>
 {% endblock %}
