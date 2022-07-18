@@ -89,7 +89,9 @@ def index(request):
 @login_required(login_url='/login/')
 def post_create(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        print('this is post' , request.POST)
+        print('this is user' , request.user)
+        form = PostForm(request.user, request.POST, request.FILES)
         if form.is_valid():
             form.instance.user = request.user
             print(request.user)
