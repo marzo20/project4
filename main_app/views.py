@@ -4,11 +4,13 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 import requests
 from .form import VehicleForm
+from .form import PostForm
 from .registerform import NewUserForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Vehicle
+from .models import Post
 from django.contrib.auth.forms import AuthenticationForm
 import json
 # Create your views here.
@@ -56,9 +58,9 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("home")
 
-def vehicles(request):
-    vehicles = Vehicle.objects.all()
-    return render(request, 'vehicle_list.html', {'vehicles':vehicles})
+def posts(request):
+    posts = Post.objects.all()
+    return render(request, 'vehicle_list.html', {'posts':posts})
 
 def info(request):
     return render(request, 'info.html')
@@ -85,28 +87,33 @@ def index(request):
     return render(request,'details.html', info_json)
 
 @login_required(login_url='/login/')
-def vehicle_create(request):
+def post_create(request):
     if request.method == 'POST':
-        form = VehicleForm(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.instance.user = request.user
-            vehicle = form.save()
-            return redirect('vehicles')
+            print(request.user)
+            # vehicle = Vehicle.objects.filter(vin= PostForm('vehicle'))
+            # vehicle_id = vehicle.id
+            # form.instance.vehicle = vehicle_id
+            post = form.save()
+            print(post)
+            return redirect('posts')
     else:
-        form = VehicleForm()
+        form = PostForm(user=request.user)
     context = {'form': form, 'header': 'Add vehicle information'}
-    return render(request, 'vehicle_form.html', context)
+    return render(request, 'post_form.html', context)
 
 def vehicle_edit(request, pk):
-    vehicle = Vehicle.objects.get(pk=pk)
+    post = Post.objects.get(pk=pk)
     if request.method == 'POST':
-        form = VehicleForm(request.POST, request.FILES, instance=vehicle)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            vehicle = form.save()
-            return redirect('vehicles')
+            post = form.save()
+            return redirect('posts')
     else:
-        form = VehicleForm(instance=vehicle)
-    return render(request, 'vehicle_form.html',{'form': form})
+        form = PostForm(instance=post)
+    return render(request, 'post_form.html',{'form': form})
 
 def vehicle_delete(request, pk):
     Vehicle.objects.get(pk=pk).delete()
@@ -114,7 +121,7 @@ def vehicle_delete(request, pk):
 
 def profile_show(request):
     # vehicles = Vehicle(user=request.user)
-    vehicles = Vehicle.objects.all()
+    vehicles = Vehicle.objects.filter(user_id=request.user.id)
     if request.user.is_authenticated:
     # Do something for authenticated users.
         return render(request, 'profile.html', {'vehicles' : vehicles})

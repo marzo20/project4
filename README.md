@@ -13,10 +13,10 @@
 - Python
 - Django
 - pillow
-- Smartcar API
-https://smartcar.com/docs/
-- Vehicle API
-    https://vpic.nhtsa.dot.gov/api/Home
+- CIS VIN DECODER API
+    https://cis-vin-decoder.p.rapidapi.com/vinDecode
+- crispy form
+- django money
 
 ### Description
 
