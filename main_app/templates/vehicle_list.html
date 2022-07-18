@@ -6,24 +6,23 @@
         <a href="add/">(+)</a>
     </h2>
     <ul>
-        {% for vehicle in vehicles %}
+        {% for post in posts %}
 
-        <a href="{{ vehicle.id }}/edit">
+        <a href="{{ post.id }}/">
             <li>
-                {% if vehicle.vehicle_image %}
+                {% if post.vehicle_image %}
                 <div>
-                    <img src="{{ vehicle.vehicle_image.url }}"width=500>
+                    <img src="{{ post.vehicle_image.url }}"width=500>
                 </div>
                 {% else %}
                 <div>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSETkXAZjZ_X0v4OMGi9AIX9BH_EmakbRndBs6kR5-0eJ4Qwd6QLFzULkDH_05kqr8iRco&usqp=CAU"width=500>
                 </div>
                 {% endif %}
-                {{ vehicle.make }}
-                {{ vehicle.model }}
-                {{ vehicle.trim }}
-                {{ vehicle.year }}
-                by {{ vehicle.user }}
+                {{ post.vehicle }}
+                {{ post.price }}
+                {{ post.date }}
+                by {{ post.user }}
             </li>
         </a>
         {% if vehicle.user == request.user %}

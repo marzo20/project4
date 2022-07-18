@@ -106,15 +106,24 @@ def post_create(request):
     context = {'form': form, 'header': 'Add vehicle information'}
     return render(request, 'post_form.html', context)
 
+def post_detail(request, pk):
+    post = Post.objects.get(pk=pk)
+    # vehicle = Vehicle.objects.get(pk=post.vehicle)
+    context = {
+        'post': post,
+        # 'vehicle': vehicle
+    }
+    return render(request, 'post_detail.html', context)
+
 def vehicle_edit(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES, instance=post)
+        form = PostForm(request.user, request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save()
             return redirect('posts')
     else:
-        form = PostForm(instance=post)
+        form = PostForm(instance=post, user=request.user)
     return render(request, 'post_form.html',{'form': form})
 
 def vehicle_delete(request, pk):

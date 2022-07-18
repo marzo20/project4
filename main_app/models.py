@@ -17,6 +17,8 @@ class Vehicle(models.Model):
         return self.vin
 
 class Post(models.Model):
+    title = models.CharField
+    comment = models.CharField
     vehicle_image = models.ImageField(null=True, blank=True, upload_to="images/")
     date = models.DateTimeField(auto_now=True)
     price= models.DecimalField(max_digits=10, decimal_places=2)
