@@ -2,12 +2,13 @@
 {% block content %}
 <section>
     <h1>{{ header }}</h1>
-   
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
+    <table>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_table }}
+            
+    </table>
+    <button type="submit">Save</button>
 </section>
 
 {% endblock %}
