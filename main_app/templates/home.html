@@ -6,13 +6,12 @@
     <p>Sell your lease car and make next downpayment</p>
     {% if user.is_authenticated %}
     <div class="button">
-        <a href="{% url  'profile' %}"><span></span>
-            <button type="button">Profile</button></a>
+        <a href="{% url  'profile' %}"><button type="button"><span></span>Profile</button></a>
     </div>
     {% else %}
     <div class="button">
-        <a href="{% url 'register' %}"><span></span><button type="button">SIGNUP</button></a>
-        <a href="{% url 'login_page' %}"><span></span><button type="button">LOGIN</button></a>
+        <a href="{% url 'register' %}"><button type="button"><span></span>SIGNUP</button></a>
+        <a href="{% url 'login_page' %}"><button type="button"><span></span>LOGIN</button></a>
     </div>
     {% endif %}
 </div>

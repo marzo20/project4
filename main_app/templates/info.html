@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="details/" method="GET">
-    <label for="VIN">VIN#</label>
-    <input name="VIN"/>
-    <button type="submit">Search for Details</button>
-</form>
+<div class="content">
+    <h2>See detailed specs with VIN</h2>
+    <form action="details/" method="GET" >
+        <label for="VIN">VIN#</label>
+        <input name="VIN"/>
+        <button type="submit">Search for Details</button>
+    </form>
+</div>
 {% endblock %}

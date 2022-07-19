@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% block content%}
-<h2>post detail page</h2>
-<h3>${{ post.price }}</h3>
-<h3>{{ post.vehicle }}</h3>
-<h3>{{ post.date }}</h3>
+<div class="details">
+    {% if post.vehicle_image %}
+
+    <img src="{{ post.vehicle_image.url }}" class="card-img-top" width="500">
+
+    {% else %}
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSETkXAZjZ_X0v4OMGi9AIX9BH_EmakbRndBs6kR5-0eJ4Qwd6QLFzULkDH_05kqr8iRco&usqp=CAU"
+    width="500">
+
+    {% endif %}
+    <div class="list-top">
+        <h3>{{ post.vehicle }}</h3>
+        <h3>${{ post.price }}</h3>
+    </div>
+    <h4>{{ post.content}}</h4>
+    <p>{{ post.date }}</p>
+    <a href="edit"><button type="button"><span></span>Edit</button></a>
+    <a href="delete/"><button type="button"><span class="red"></span>Delete</button></a>
+</div>
 {% endblock %}

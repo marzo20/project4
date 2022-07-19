@@ -70,7 +70,7 @@ def post_detail(request, pk):
         # 'vehicle': vehicle
     }
     return render(request, 'post_detail.html', context)
-    
+
 def info(request):
     return render(request, 'info.html')
 
@@ -93,7 +93,8 @@ def index(request):
     # }
     print(url)
     print(info_json)
-    return render(request,'details.html', info_json)
+    return render(request,'details.html', {'data':info_json,
+    'vin': querystring})
 
 @login_required(login_url='/login/')
 def post_create(request):
@@ -129,8 +130,8 @@ def vehicle_edit(request, pk):
     return render(request, 'post_form.html',{'form': form})
 
 def vehicle_delete(request, pk):
-    Vehicle.objects.get(pk=pk).delete()
-    return redirect('vehicles')
+    Post.objects.get(pk=pk).delete()
+    return redirect('posts')
 
 def profile_show(request):
     # vehicles = Vehicle(user=request.user)

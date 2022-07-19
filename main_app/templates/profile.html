@@ -1,30 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-    <h2>Welcome, {{ user.username }}</h2>
-    
-    
-    <form action="add/" method="GET">
-        <label for="VIN">VIN#</label>
-        <input name="VIN" />
-        <button type="submit">submit</button>
-    </form>
-    
-    
+<div class="profile">
+    <div class="profileform">
+        <h2>Welcome, {{ user.username }}</h2>
+        <p>Add your vehicle with VIN</p>
+
+        <form action="add/" method="GET">
+            <label for="VIN">VIN#</label>
+            <input name="VIN" />
+            <button type="submit"><span></span>Search</button>
+        </form>
+    </div>
+
+
+
     {% for vehicle in vehicles %}
 
     <a href="{{ vehicle.id }}/edit">
         <li>
-            {% if vehicle.vehicle_image %}
-            <div>
-                <img src="{{ vehicle.vehicle_image.url }}" width=500>
-            </div>
-            {% else %}
-            <div>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSETkXAZjZ_X0v4OMGi9AIX9BH_EmakbRndBs6kR5-0eJ4Qwd6QLFzULkDH_05kqr8iRco&usqp=CAU"
-                    width=500>
-            </div>
-            {% endif %}
+            {{vehicle}}
             {{ vehicle.make }}
             {{ vehicle.model }}
             {{ vehicle.trim }}
