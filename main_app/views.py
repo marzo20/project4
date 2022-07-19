@@ -62,6 +62,15 @@ def posts(request):
     posts = Post.objects.all()
     return render(request, 'vehicle_list.html', {'posts':posts})
 
+def post_detail(request, pk):
+    post = Post.objects.get(pk=pk)
+    # vehicle = Vehicle.objects.get(pk=post.vehicle)
+    context = {
+        'post': post,
+        # 'vehicle': vehicle
+    }
+    return render(request, 'post_detail.html', context)
+    
 def info(request):
     return render(request, 'info.html')
 
@@ -106,14 +115,7 @@ def post_create(request):
     context = {'form': form, 'header': 'Add vehicle information'}
     return render(request, 'post_form.html', context)
 
-def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
-    # vehicle = Vehicle.objects.get(pk=post.vehicle)
-    context = {
-        'post': post,
-        # 'vehicle': vehicle
-    }
-    return render(request, 'post_detail.html', context)
+
 
 def vehicle_edit(request, pk):
     post = Post.objects.get(pk=pk)

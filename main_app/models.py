@@ -14,11 +14,11 @@ class Vehicle(models.Model):
     
 
     def __str__(self):
-        return self.vin
+        return str(self.year) + " " + str(self.make) + " " + str(self.model)
 
 class Post(models.Model):
-    title = models.CharField
-    comment = models.CharField
+    milage = models.IntegerField(max_length=10, default=None)
+    content = models.TextField(default=None)
     vehicle_image = models.ImageField(null=True, blank=True, upload_to="images/")
     date = models.DateTimeField(auto_now=True)
     price= models.DecimalField(max_digits=10, decimal_places=2)
