@@ -62,6 +62,7 @@ def posts(request):
     posts = Post.objects.all()
     return render(request, 'vehicle_list.html', {'posts':posts})
 
+@login_required(login_url='/login/')
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     # vehicle = Vehicle.objects.get(pk=post.vehicle)
@@ -71,6 +72,7 @@ def post_detail(request, pk):
     }
     return render(request, 'post_detail.html', context)
 
+@login_required(login_url='/login/')
 def info(request):
     return render(request, 'info.html')
 
@@ -117,9 +119,11 @@ def post_create(request):
     return render(request, 'post_form.html', context)
 
 
-
-def vehicle_edit(request, pk):
+@login_required(login_url='/login/')
+def post_edit(request, pk):
     post = Post.objects.get(pk=pk)
+    if post.user != request.user:
+        return redirect('no_access')
     if request.method == 'POST':
         form = PostForm(request.user, request.POST, request.FILES, instance=post)
         if form.is_valid():
@@ -127,12 +131,20 @@ def vehicle_edit(request, pk):
             return redirect('posts')
     else:
         form = PostForm(instance=post, user=request.user)
-    return render(request, 'post_form.html',{'form': form})
+        return render(request, 'post_form.html',{'form': form})
+    
 
-def vehicle_delete(request, pk):
-    Post.objects.get(pk=pk).delete()
-    return redirect('posts')
+@login_required(login_url='/login/')
+def post_delete(request, pk):
+    if request.user.is_authenticated:
+        post=Post.objects.get(pk=pk)
+        if post.user == request.user:
+            post.delete()
+            return redirect('posts')
+        else:
+            return redirect('no_access')
 
+@login_required(login_url='/login/')
 def profile_show(request):
     # vehicles = Vehicle(user=request.user)
     vehicles = Vehicle.objects.filter(user_id=request.user.id)
@@ -141,6 +153,18 @@ def profile_show(request):
         return render(request, 'profile.html', {'vehicles' : vehicles})
     else:
         return HttpResponse('<h1>Something went wrong with login</h1>')
+        
+def vehicle_delete(request, pk):
+    if request.user.is_authenticated:
+        vehicle=Vehicle.objects.get(pk=pk)
+        if vehicle.user == request.user:
+            vehicle.delete()
+            return redirect('profile')
+        else:
+            return redirect('no_access')
+
+def no_access(request):
+    return render(request, 'noaccess.html')
 
 def display(request):
     querystring = request.GET.get('VIN')

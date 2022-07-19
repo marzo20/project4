@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="form">
+<div class="form">
     <h1>{{ header }}</h1>
-    <table class="table">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_table }}
-            
-    </table>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+    </form>
     <button type="submit"><span></span>Save</button>
-</section>
+</div>
 
 {% endblock %}

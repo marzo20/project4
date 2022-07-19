@@ -16,8 +16,11 @@
         <h3>${{ post.price }}</h3>
     </div>
     <h4>{{ post.content}}</h4>
-    <p>{{ post.date }}</p>
-    <a href="edit"><button type="button"><span></span>Edit</button></a>
+    <p> {{ post.date }} Posted by. {{ post.user}}</p>
+    
+    {% if post.user == request.user%}
+    <a href="edit/"><button type="button"><span></span>Edit</button></a>
     <a href="delete/"><button type="button"><span class="red"></span>Delete</button></a>
+    {% endif %}
 </div>
 {% endblock %}

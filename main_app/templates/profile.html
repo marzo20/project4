@@ -15,16 +15,46 @@
 
 
     {% for vehicle in vehicles %}
-
-    <a href="{{ vehicle.id }}/edit">
-        <li>
-            {{vehicle}}
-            {{ vehicle.make }}
-            {{ vehicle.model }}
-            {{ vehicle.trim }}
-            {{ vehicle.year }}
-        </li>
-    </a>
+<!-- <div class="collapse_form">
+    <div>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            {{ vehicle }}
+        </button>
+        <a href="{{vehicle.id}}/delete/"><button><span class="red"></span>DELETE</button></a>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <ul>
+                
+                <li>{{ vehicle.vin }}</li>
+                <li>{{ vehicle.make }}</li>
+                <li>{{ vehicle.model }}</li>
+                <li>{{ vehicle.bodyClass }}</li>
+            </ul>
+        </div>
+</div> -->
+<div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="heading{{vehicle.id}}">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{vehicle.id}}" aria-expanded="false" aria-controls="collapse{{vehicle.id}}">
+            {{ vehicle }}
+          </button>
+          <a href="{{vehicle.id}}/delete/"><button><span class="red"></span>DELETE</button></a>
+        </h2>
+      </div>
+  
+      <div id="collapse{{vehicle.id}}" class="collapse" aria-labelledby="heading{{vehicle.id}}" data-parent="#accordionExample">
+        <div class="card-body">
+            <li>{{ vehicle.vin }}</li>
+                <li>{{ vehicle.make }}</li>
+                <li>{{ vehicle.model }}</li>
+                <li>{{ vehicle.bodyClass }}</li>
+        </div>
+      </div>
+    </div>
+    
     {% endfor %}
 
 </div>
