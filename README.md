@@ -22,7 +22,7 @@
 - requests
 ### Description
 
-- Online community that shares used car price and leased car price. 
+- Online community that lists leased vehicle for sale. 
 
 ### MVP Goal
 - Login Authentication working

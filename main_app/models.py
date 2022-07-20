@@ -14,7 +14,7 @@ class Vehicle(models.Model):
     
 
     def __str__(self):
-        return str(self.year) + " " + str(self.make) + " " + str(self.model)
+        return str(self.year) + " " + str(self.make) + " " + str(self.model) + "  " + str(self.vin)
 
 class Post(models.Model):
     milage = models.IntegerField(max_length=10, default=None)
