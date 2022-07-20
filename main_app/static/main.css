@@ -124,6 +124,11 @@
     display: flex;
     justify-content: space-between;
 }
+.mb-0 button{
+    color: white;
+    font-size: large;
+
+}
 .form{
     margin-top: 100px;
     width: 100%;
@@ -235,4 +240,24 @@ button:hover{
     display: grid;
     justify-content: center;
     color: white;
+}
+.about{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    color: white;
+}
+.column-2{
+    width: 80%;
+}
+.content-about{
+    display: grid;
+    margin-left: 300px;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    width: 800px;
 }

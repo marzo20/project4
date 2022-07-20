@@ -35,7 +35,7 @@
 - User can search a car information and specs using API
 - 
 ### Wireframes
-
+![ERD](/pitch/erd.png)
 ![Wireframe](/pitch/wireframe.png)
 
 ### User stories
