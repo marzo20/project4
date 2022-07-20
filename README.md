@@ -5,8 +5,10 @@
 
 - Fork and clone
 - cd to the cloned directory
-- pip3 install django, pillow, and smartcar
+- pip3 install django, pillow, and requests
+- source .env/vin/activate
 - python3 mangae.py runserver
+
 
 ### Technologies
 
@@ -17,7 +19,7 @@
     https://cis-vin-decoder.p.rapidapi.com/vinDecode
 - crispy form
 - django money
-
+- requests
 ### Description
 
 - Online community that shares used car price and leased car price. 
@@ -35,9 +37,12 @@
 - User can search a car information and specs using API
 - 
 ### Wireframes
-![ERD](/pitch/erd.png)
+
 ![Wireframe](/pitch/wireframe.png)
 
+### ERD
+
+![ERD](/pitch/erd.png)
 ### User stories
 
 - User wants to sign in community
