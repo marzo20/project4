@@ -50,20 +50,18 @@
 
 | VERB | URL pattern | Action \(CRUD\) | Description |
 | :--- | :--- | :--- | :--- |
-| GET | /users/login|\(Read\) | Show loginPage |
-| POST | /users/login|\(Read\) | Check authentication and authorize |
-| GET | /users/register |\(READ\) | Show Sign Up Page |
-| POST | /users/register |\(Create\) | Create User/authentication and authorization |
-| POST | /users/edit |\(Update\) | Route to Update profile Info in DB |
-| POST | /users/changepassword |\(Update\) | Route to Update Password in DB |
-| GET | /users/logout |\(Read\) | logout |
-| GET | /users/profile |\(Read\) | Shows users profile Page |
-| POST | /users/profile |\(UPDATE\) | Update user's profile |
-| POST | /users/changepassword |\(UPDATE\) | Change user's password |
-| GET | /community/posts |\(Read\) | Show all of user's posts|
-| POST | /community/postform |\(Create\) | Create a post about a dish |
-| GET | /community/posts/:id |\(READ\) | Show details about a dish post|
-| POST | /community/post/:id/edit |\(UPDATE\) | Edit selected post|
-| DELETE | /post/:id |\(DELETE\) | Delete the post |
-| GET | /search |\(Read\) | show search results |
-| GET | /car/:vin# |\(Read\) | Show information of a car|
+| GET | /login|\(Read\) | Show loginPage |
+| GET | /logout |\(Read\) | logout |
+| POST | /register |\(Create\) | Create User/authentication and authorization |
+| GET | /profile |\(Read\) | Shows users profile Page |
+| GET | /posts |\(Read\) | Show all of user's posts|
+| POST | /posts/add |\(Create\) | Create a post about a vehicle |
+| GET | /posts/:id |\(READ\) | Show details about a vehicle post|
+| POST | /post/:id/edit |\(UPDATE\) | Edit selected post|
+| DELETE | /post/:id/delete |\(DELETE\) | Delete the post |
+| GET | /info |\(CREATE\) | Show spec check page |
+| GET | /info/details|\(Read\) | GET detail info from API |
+| GET | /profile/add |\(READ\) | Show what user adds |
+| POST | /profile/add/create |\(CREATE\) | User create vehicle in profile|
+| DELETE | /profile/:pk/delete |\(DELETE\) | DELETE vehicle from profile |
+|\
