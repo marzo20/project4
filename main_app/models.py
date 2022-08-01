@@ -17,7 +17,7 @@ class Vehicle(models.Model):
         return str(self.year) + " " + str(self.make) + " " + str(self.model) + "  " + str(self.vin)
 
 class Post(models.Model):
-    milage = models.IntegerField(max_length=10, default=None)
+    milage = models.IntegerField(default=None)
     content = models.TextField(default=None)
     vehicle_image = models.ImageField(null=True, blank=True, upload_to="images/")
     date = models.DateTimeField(auto_now=True)
